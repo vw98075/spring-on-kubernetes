@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: spring-on-kubernetes
+  name: spring-on-kubernetes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-on-kubernetes
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: spring-on-kubernetes
+    spec:
+      containers:
+      - image: docker.io/vw98008/spring-on-kubernetes
+        name: spring-on-kubernetes
+        resources: {}
+        readinessProbe:
+          httpGet:
+            port: 8080
+            path: /actuator/health/readiness
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /actuator/health/liveness
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sh", "-c", "sleep 10"]
+status: {}
