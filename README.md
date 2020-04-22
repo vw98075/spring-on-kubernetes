@@ -107,6 +107,11 @@ With our container build and deployed to a registry we can now run this containe
 * Or you can have Kubernetes generate it for you using kubectl
 * The --dry-run flag allows us to generate the YAML without actually deploying anything to Kubernetes
 
+You need to start up Kubernetes first to run kubectl.
+
+```
+minikube start
+```
 ```
 mkdir k8s
 kubectl create deployment [app name] --image docker.io/[Docker Hub user ID]/[app name] -o yaml --dry-run > k8s/deployment.yaml
